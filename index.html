@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>نوا موسیقی</title>
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;min-height:100vh;padding:20px;
+display:flex;align-items:center;justify-content:center;
+background:linear-gradient(145deg,#101827,#211437);
+color:white;font-family:Tahoma,Arial,sans-serif
+}
+main{width:100%;max-width:620px;text-align:center}
+h1{color:#f4cd73;font-size:32px}
+header p{color:#cbd5e1}
+.player{
+background:#20283a;border:1px solid #3c4962;
+border-radius:22px;padding:24px;
+box-shadow:0 12px 35px #0005
+}
+.cover{
+height:150px;border-radius:16px;
+background:linear-gradient(135deg,#3a2b58,#172d45);
+display:grid;place-items:center;font-size:60px
+}
+h2{font-size:21px}
+.artist{color:#c7b8f5;margin-bottom:20px}
+audio{width:100%;margin:10px 0}
+.nav{display:flex;gap:12px;justify-content:center;margin-top:15px}
+button{
+border:0;border-radius:13px;padding:13px 24px;
+background:#e9c36b;color:#21182b;
+font-weight:bold;font-size:16px
+}
+.count{margin-top:18px;color:#aeb9ca}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h1>نوا موسیقی</h1>
+<p>پخش موسیقی فارسی</p>
+</header>
+
+<section class="player">
+<div class="cover">♫</div>
+<h2 id="title"></h2>
+<div class="artist" id="artist"></div>
+<audio id="audio" controls preload="none"></audio>
+<div class="nav">
+<button onclick="change(-1)">قبلی</button>
+<button onclick="change(1)">بعدی</button>
+</div>
+<div class="count" id="count"></div>
+</section>
+</main>
+
+<script>
+const songs=[
+["در سکوت شب","عرفان طهماسبی","https://dl.melovy.ir/2023/08/Erfan-Tahmasbi-dar-sokote-shab-khane-zad-faryad2.mp3"],
+["بچه ننه","محسن لرستانی","https://dl.melovy.ir/2023/02/Mohsen-Lorestani-Bache-Nane2.mp3"],
+["عروسک جون","هایده","https://dl.tiarin.ir/FRE/99/1/The%20Best%20of%20Hayedeh%20(Tiarin%20Playlist)/19%20Arousak%20(Hayedeh).mp3"],
+["یک لحظه نگاهش کردم (دین و دنیام)","رضا درخشان","https://dl.navaseda.ir/1403/09/07/Reza-Derakhshan-Yek-Lahze-Negahesh-Kardam-Dino-Donyam.mp3"],
+["نجلا (مثل کشتی زیر دریا)","عرفان طهماسبی","https://dl.melovy.ir/2022/05/Erfan-Tahmasbi-Najla2.mp3"]
+];
+
+let index=0;
+const audio=document.getElementById("audio");
+
+function showSong(){
+const song=songs[index];
+document.getElementById("title").textContent=song[0];
+document.getElementById("artist").textContent=song[1];
+document.getElementById("count").textContent=(index+1)+" از "+songs.length;
+audio.pause();
+audio.src=song[2];
+audio.load();
+}
+
+function change(step){
+index=(index+step+songs.length)%songs.length;
+showSong();
+}
+
+showSong();
+</script>
+</body>
+</html>
